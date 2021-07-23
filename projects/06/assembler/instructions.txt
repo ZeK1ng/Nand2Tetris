@@ -1,0 +1,4 @@
+in the working directory run --- 
+g++ Tokenizer.cpp assembler.cpp 
+./a.out input.asm
+this will generate input.hack file. 

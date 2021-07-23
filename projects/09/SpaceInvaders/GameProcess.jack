@@ -1,0 +1,80 @@
+/*/home/zeking/Desktop/projects2020spring-ZeK1ng/projects/09/SpaceInvaders*/
+class GameProcess{
+    field Spaceship ship;
+    field Bullet bullet;
+    field Alien alien;
+    field Alien alien1;
+    field Alien alien2;
+    field Alien alien3;
+    field Alien alien4;
+    field Alien alien5;
+    field Alien alien6;
+
+    constructor GameProcess new() {
+        let ship = Spaceship.new(248, 230);
+        let bullet = Bullet.new();
+        let alien = Alien.new(0,0);
+        return this;
+    }
+    method void run(){
+        var char keyPressed ; 
+        var boolean quit;
+        let quit = false;
+        while(~quit){
+        do alien.move();
+
+            let keyPressed = Keyboard.keyPressed();
+            if(keyPressed = 81){
+                let quit = true;
+            }
+            if(keyPressed = 130){
+                do ship.moveLeft();
+            }
+            if(keyPressed = 132){
+                do ship.moveRight();
+            }
+            if(keyPressed = 32){
+                do bullet.fire(ship.getX(),ship.getY()-16); 
+                if(bullet.getX() = alien.getX() & bullet.getY()=alien.getY()){
+                    do bullet.erase();
+                    do alien.kill();
+                    do alien.erase();
+                    do drawWon();
+                    do Sys.Halt();
+                }
+            }
+            do Sys.wait(3);
+
+        }
+        return ;
+    }
+    method void drawWon(){
+        var int memAddress;
+        let memAddress = 16384 + 100+100;
+        do Memory.poke(memAddress + 0, 0);
+        do Memory.poke(memAddress + 32, 0);
+        do Memory.poke(memAddress + 64, 0);
+        do Memory.poke(memAddress + 96, 5380);
+        do Memory.poke(memAddress + 128, 5380);
+        do Memory.poke(memAddress + 160, 5380);
+        do Memory.poke(memAddress + 192, 5380);
+        do Memory.poke(memAddress + 224, 5380);
+        do Memory.poke(memAddress + 256, 5380);
+        do Memory.poke(memAddress + 288, 5476);
+        do Memory.poke(memAddress + 320, 7572);
+        do Memory.poke(memAddress + 352, 3340);
+        do Memory.poke(memAddress + 384, 0);
+        do Memory.poke(memAddress + 416, 0);
+        do Memory.poke(memAddress + 448, 0);
+        do Memory.poke(memAddress + 480, 0);
+        return;
+    }
+
+    method void dispose(){
+        do ship.dispose();
+        return;
+    }
+
+
+
+}

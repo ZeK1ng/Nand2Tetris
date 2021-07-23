@@ -1,0 +1,87 @@
+class Spaceship {
+    field int x, y;
+
+    constructor Spaceship new(int new_x, int new_y) {
+        let x = new_x;
+        let y = new_y;
+        do draw();
+        return this;
+    }
+
+    method int getX() {
+        return x;
+    }
+
+    method int getY() {
+        return y;
+    }
+
+  
+
+    method void draw() {
+        var int memAddress;
+        let memAddress = 16384 + (x/16) + (y*32);
+	    do Memory.poke(memAddress + 0, 960);
+	    do Memory.poke(memAddress + 32, 2016);
+	    do Memory.poke(memAddress + 64, 4080);
+	    do Memory.poke(memAddress + 96, 8184);
+	    do Memory.poke(memAddress + 128, 8184);
+	    do Memory.poke(memAddress + 160, 8184);
+	    do Memory.poke(memAddress + 192, 8184);
+	    do Memory.poke(memAddress + 224, 8184);
+	    do Memory.poke(memAddress + 256, 8184);
+	    do Memory.poke(memAddress + 288, 8184);
+	    do Memory.poke(memAddress + 320, 8184);
+	    do Memory.poke(memAddress + 352, 8184);
+	    do Memory.poke(memAddress + 384, -6169);
+	    do Memory.poke(memAddress + 416, -6169);
+	    do Memory.poke(memAddress + 448, -7225);
+	    do Memory.poke(memAddress + 480, -8185);
+	    return;
+    }
+
+    method void erase() {
+        var int memAddress;
+        let memAddress = 16384 + (x/16) + (y*32);
+        do Memory.poke(memAddress+0, 0);
+        do Memory.poke(memAddress+32, 0);
+        do Memory.poke(memAddress+64, 0);
+        do Memory.poke(memAddress+96, 0);
+        do Memory.poke(memAddress+128, 0);
+        do Memory.poke(memAddress+160, 0);
+        do Memory.poke(memAddress+192, 0);
+        do Memory.poke(memAddress+224, 0);
+        do Memory.poke(memAddress+256, 0);
+        do Memory.poke(memAddress+288, 0);
+        do Memory.poke(memAddress+320, 0);
+        do Memory.poke(memAddress+352, 0);
+        do Memory.poke(memAddress+384, 0);
+        do Memory.poke(memAddress+416, 0);
+        do Memory.poke(memAddress+448, 0);
+        do Memory.poke(memAddress+480, 0);
+        return;
+    }
+
+    method void moveLeft() {
+        if (x > 1) {
+            do erase();
+            let x = x - 1;
+            do draw();
+        }
+        return;
+    }
+
+    method void moveRight() {
+        if (x < 511) {
+            do erase();
+            let x = x + 1;
+            do draw();
+        }
+        return;
+    }
+
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+}

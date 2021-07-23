@@ -1,0 +1,10 @@
+class Main {
+    
+    function void main() {
+        var GameProcess game;
+        let game = GameProcess.new();
+        do game.run();
+        do game.dispose();
+        return;
+    }
+}

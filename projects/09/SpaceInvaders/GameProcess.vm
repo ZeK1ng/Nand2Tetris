@@ -1,0 +1,228 @@
+function GameProcess.new 0
+push constant 9
+call Memory.alloc 1
+pop pointer 0
+push constant 248
+push constant 230
+call Spaceship.new 2
+pop this 0
+call Bullet.new 0
+pop this 1
+push constant 0
+push constant 0
+call Alien.new 2
+pop this 2
+push pointer 0
+return
+function GameProcess.run 2
+push argument 0
+pop pointer 0
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 1
+not
+not
+if-goto WHILE_END0
+push this 2
+call Alien.move 1
+pop temp 0
+call Keyboard.keyPressed 0
+pop local 0
+push local 0
+push constant 81
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+not
+pop local 1
+label IF_FALSE0
+push local 0
+push constant 130
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 0
+call Spaceship.moveLeft 1
+pop temp 0
+label IF_FALSE1
+push local 0
+push constant 132
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 0
+call Spaceship.moveRight 1
+pop temp 0
+label IF_FALSE2
+push local 0
+push constant 32
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push this 1
+push this 0
+call Spaceship.getX 1
+push this 0
+call Spaceship.getY 1
+push constant 16
+sub
+call Bullet.fire 3
+pop temp 0
+push this 1
+call Bullet.getX 1
+push this 2
+call Alien.getX 1
+eq
+push this 1
+call Bullet.getY 1
+and
+push this 2
+call Alien.getY 1
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push this 1
+call Bullet.erase 1
+pop temp 0
+push this 2
+call Alien.kill 1
+pop temp 0
+push this 2
+call Alien.erase 1
+pop temp 0
+push pointer 0
+call GameProcess.drawWon 1
+pop temp 0
+call Sys.Halt 0
+pop temp 0
+label IF_FALSE4
+label IF_FALSE3
+push constant 3
+call Sys.wait 1
+pop temp 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function GameProcess.drawWon 1
+push argument 0
+pop pointer 0
+push constant 16384
+push constant 100
+add
+push constant 100
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 5380
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 5380
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 5380
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 5380
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 5380
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 5380
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 5476
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 7572
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 3340
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function GameProcess.dispose 0
+push argument 0
+pop pointer 0
+push this 0
+call Spaceship.dispose 1
+pop temp 0
+push constant 0
+return
